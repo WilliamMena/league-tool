@@ -7,9 +7,9 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.integer :team_2_wins
       t.integer :team_1_high_throws
       t.integer :team_2_high_throws
-      t.bool :currently_playing
-      t.references :team_1_id, foreign_key: true
-      t.references :team_2_id, foreign_key: true
+      t.boolean :currently_playing
+      t.references :team_1
+      t.references :team_2
 
       t.timestamps
     end
