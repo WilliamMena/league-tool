@@ -15,3 +15,12 @@ bar2 = Bar.create(name: "Second Bar", address: "102 Test Drive")
 
 Gym.create(name: "Gym one", email: "Test@test.com")
 Gym.create(name: "Gym two", email: "Test@test.com")
+
+team1 = Team.create(name: "Pink Squad", color: "Pink")
+team2 = Team.create(name: "Black Squad", color: "Black")
+
+team3 = Team.create(name: "Red Squad", color: "Red")
+team4 = Team.create(name: "Purple Squad", color: "Purple")
+
+Game.create(team_1_id: team1, team_2_id: team2)
+Game.create(team_1_id: team3, team_2_id: team1)
