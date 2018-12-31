@@ -23,13 +23,16 @@ gym2 = Gym.create(name: "Gym two", email: "Test@test.com")
 location1 = Location.create(gym: gym1, bar: bar1)
 location1 = Location.create(gym: gym2, bar: bar2)
 
+default_team = Team.create(name: "Default Team", color: "empty")
+
 team1 = Team.create(name: "Pink Squad", color: "Pink")
 team2 = Team.create(name: "Black Squad", color: "Black")
 
 team3 = Team.create(name: "Red Squad", color: "Red")
 team4 = Team.create(name: "Purple Squad", color: "Purple")
 
-game1 = Game.create(team_1_id: team1, team_2_id: team2)
-game2 = Game.create(team_1_id: team3, team_2_id: team1)
+event1 = Event.create(date: Time.now, location: location1, season: season1, bar_game: "Flip Cup", winner: default_team)
+event2 = Event.create(date: Time.now, location: location1, season: season1, bar_game: "Beer Pong", winner: default_team)
 
-event1 = Event.create(date: Time.now, location: location1, season: season1, bar_game: "Flip Cup")
+game1 = Game.create(team_1: team1, team_2: team2, event: event1)
+game2 = Game.create(team_1: team3, team_2: team1, event: event2)

@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.datetime "date"
     t.bigint "location_id"
     t.bigint "season_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "bar_game"
     t.bigint "team_id"
+
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["season_id"], name: "index_events_on_season_id"
     t.index ["team_id"], name: "index_events_on_team_id"
@@ -47,9 +48,9 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.boolean "currently_playing"
     t.bigint "team_1_id"
     t.bigint "team_2_id"
+    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "event_id"
     t.index ["event_id"], name: "index_games_on_event_id"
     t.index ["team_1_id"], name: "index_games_on_team_1_id"
     t.index ["team_2_id"], name: "index_games_on_team_2_id"

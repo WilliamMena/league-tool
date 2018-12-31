@@ -2,6 +2,7 @@ class Team < ApplicationRecord
   has_many :games, :class_name => "Game", :foreign_key => "team_1_id"
   has_many :games, :class_name => "Game", :foreign_key => "team_2_id"
   has_many :bar_game_wins, :class_name => "Event", :foreign_key => "team_id"
+  # has_many :events, :through => :games
 
   def all_games
     games = []
