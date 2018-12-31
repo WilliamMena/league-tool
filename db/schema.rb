@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_180057) do
+ActiveRecord::Schema.define(version: 2018_12_31_201243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 2018_12_31_180057) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "leagues", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.bigint "gym_id"
     t.bigint "bar_id"
@@ -67,6 +73,14 @@ ActiveRecord::Schema.define(version: 2018_12_31_180057) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.string "name"
+    t.bigint "league_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["league_id"], name: "index_seasons_on_league_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -89,4 +103,5 @@ ActiveRecord::Schema.define(version: 2018_12_31_180057) do
 
   add_foreign_key "locations", "bars"
   add_foreign_key "locations", "gyms"
+  add_foreign_key "seasons", "leagues"
 end
