@@ -1,7 +1,7 @@
 class Player < ApplicationRecord
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true
-  validates :password, presence: true
+  validates :first_name
+  validates :last_name
+  validates :email
+  validates :password
   validates :phone_number
 end

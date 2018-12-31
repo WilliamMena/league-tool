@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_020552) do
+ActiveRecord::Schema.define(version: 2018_12_31_180057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bars", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone"
+    t.string "contact_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade do |t|
     t.datetime "start_time"
@@ -29,6 +38,25 @@ ActiveRecord::Schema.define(version: 2018_12_28_020552) do
     t.datetime "updated_at", null: false
     t.index ["team_1_id"], name: "index_games_on_team_1_id"
     t.index ["team_2_id"], name: "index_games_on_team_2_id"
+  end
+
+  create_table "gyms", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "email"
+    t.string "contant_name"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.bigint "gym_id"
+    t.bigint "bar_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bar_id"], name: "index_locations_on_bar_id"
+    t.index ["gym_id"], name: "index_locations_on_gym_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -59,4 +87,6 @@ ActiveRecord::Schema.define(version: 2018_12_28_020552) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "locations", "bars"
+  add_foreign_key "locations", "gyms"
 end
