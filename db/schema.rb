@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_201243) do
+ActiveRecord::Schema.define(version: 2018_12_31_204921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2018_12_31_201243) do
     t.string "contact_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.datetime "date"
+    t.bigint "location_id"
+    t.bigint "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_events_on_location_id"
+    t.index ["season_id"], name: "index_events_on_season_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -36,6 +46,8 @@ ActiveRecord::Schema.define(version: 2018_12_31_201243) do
     t.bigint "team_2_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_games_on_event_id"
     t.index ["team_1_id"], name: "index_games_on_team_1_id"
     t.index ["team_2_id"], name: "index_games_on_team_2_id"
   end
@@ -101,6 +113,9 @@ ActiveRecord::Schema.define(version: 2018_12_31_201243) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "events", "locations"
+  add_foreign_key "events", "seasons"
+  add_foreign_key "games", "events"
   add_foreign_key "locations", "bars"
   add_foreign_key "locations", "gyms"
   add_foreign_key "seasons", "leagues"

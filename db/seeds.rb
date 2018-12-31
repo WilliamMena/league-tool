@@ -24,3 +24,5 @@ team4 = Team.create(name: "Purple Squad", color: "Purple")
 
 Game.create(team_1_id: team1, team_2_id: team2)
 Game.create(team_1_id: team3, team_2_id: team1)
+
+League.create(name: "Sandlot")
