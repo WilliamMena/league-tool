@@ -99,12 +99,6 @@ ActiveRecord::Schema.define(version: 2019_01_01_014728) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "players_teams", id: false, force: :cascade do |t|
-    t.bigint "player_id", null: false
-    t.bigint "team_id", null: false
-    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id"
-  end
-
   create_table "seasons", force: :cascade do |t|
     t.string "name"
     t.bigint "league_id"
