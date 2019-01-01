@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_31_214144) do
+ActiveRecord::Schema.define(version: 2019_01_01_014728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,10 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.datetime "date"
     t.bigint "location_id"
     t.bigint "season_id"
-    t.string "bar_game"
-    t.bigint "team_id"
-
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bar_game"
+    t.bigint "team_id"
     t.index ["location_id"], name: "index_events_on_location_id"
     t.index ["season_id"], name: "index_events_on_season_id"
     t.index ["team_id"], name: "index_events_on_team_id"
@@ -48,9 +47,9 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.boolean "currently_playing"
     t.bigint "team_1_id"
     t.bigint "team_2_id"
-    t.bigint "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
     t.index ["event_id"], name: "index_games_on_event_id"
     t.index ["team_1_id"], name: "index_games_on_team_1_id"
     t.index ["team_2_id"], name: "index_games_on_team_2_id"
@@ -81,6 +80,15 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.index ["gym_id"], name: "index_locations_on_gym_id"
   end
 
+  create_table "player_teams", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_player_teams_on_player_id"
+    t.index ["team_id"], name: "index_player_teams_on_team_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -89,6 +97,12 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "players_teams", id: false, force: :cascade do |t|
+    t.bigint "player_id", null: false
+    t.bigint "team_id", null: false
+    t.index ["player_id", "team_id"], name: "index_players_teams_on_player_id_and_team_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -123,5 +137,7 @@ ActiveRecord::Schema.define(version: 2018_12_31_214144) do
   add_foreign_key "games", "events"
   add_foreign_key "locations", "bars"
   add_foreign_key "locations", "gyms"
+  add_foreign_key "player_teams", "players"
+  add_foreign_key "player_teams", "teams"
   add_foreign_key "seasons", "leagues"
 end
